@@ -2,12 +2,14 @@ name: static analysis
 
 on:
   push:
+    branches: [main]
     paths:
       - '**.php'
       - 'phpstan.neon'
       - 'composer.json'
       - '.github/workflows/static-analysis.yml'
   pull_request:
+    branches: [main]
     paths:
       - '**.php'
       - 'phpstan.neon'
