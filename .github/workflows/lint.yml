@@ -2,14 +2,13 @@ name: lint
 
 on:
   push:
-    branches: [main]
+    branches: [1.x, 2.x]
     paths:
       - '**.php'
       - 'pint.json'
       - 'composer.json'
       - '.github/workflows/lint.yml'
   pull_request:
-    branches: [main]
     paths:
       - '**.php'
       - 'pint.json'
