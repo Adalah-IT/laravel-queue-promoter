@@ -11,28 +11,22 @@ use Illuminate\Queue\RedisQueue;
  */
 class PromotingRedisQueue extends RedisQueue
 {
-    /** Real connection name to report, so pause flags, queue routes, and events resolve correctly. */
+    /** Real connection name to report, so pause flags and events resolve correctly. */
     private ?string $reportConnectionName = null;
 
     public function promotingFor(?string $connectionName): static
     {
         $this->reportConnectionName = $connectionName;
 
-        return $this->setConnectionName($connectionName ?? $this->connectionName);
+        return $this;
     }
 
     /**
-     * Keep the real connection name even though the queue is registered under a
-     * throwaway "{connection}:promoter" name. Laravel 13 resolves queue forwarding
-     * rules against this name (Queue::resolveQueue()), so reporting the promoter's
-     * name would migrate keys no real worker consumes.
-     *
-     * @param  string  $name
-     * @return $this
+     * @return string|null
      */
-    public function setConnectionName($name)
+    public function getConnectionName()
     {
-        return parent::setConnectionName($this->reportConnectionName ?? $name);
+        return $this->reportConnectionName ?? parent::getConnectionName();
     }
 
     /**
