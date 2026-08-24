@@ -2,14 +2,12 @@ name: tests
 
 on:
   push:
-    branches: [main]
     paths:
       - '**.php'
       - 'composer.json'
       - 'phpunit.xml'
       - '.github/workflows/tests.yml'
   pull_request:
-    branches: [main]
     paths:
       - '**.php'
       - 'composer.json'
